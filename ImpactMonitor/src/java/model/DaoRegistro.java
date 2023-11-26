@@ -65,7 +65,7 @@ public class DaoRegistro {
 
     public ArrayList<ImpactoBeans> pesquisaHorario(String horaInicio, String horaFim) {
         ArrayList<ImpactoBeans> impactos = new ArrayList<>();
-        String read = "SELECT * FROM registro where hora_impacto > '" + horaInicio + "' AND hora_impacto < '" + horaFim + "'";
+        String read = "SELECT * FROM registro where hora_impacto >= '" + horaInicio + "' AND hora_impacto <= '" + horaFim + "'";
         try {
             Connection conexao = conexaoBD();
             PreparedStatement pt = conexao.prepareStatement(read);
@@ -134,7 +134,7 @@ public class DaoRegistro {
 
     public ArrayList<ImpactoBeans> pesquisaData(String dataInicio, String dataFim) {
         ArrayList<ImpactoBeans> impactos = new ArrayList<>();
-        String read = "SELECT * FROM registro where data_impacto > '" + dataInicio + "' AND data_impacto < '" + dataFim + "'";
+        String read = "SELECT * FROM registro where data_impacto >= '" + dataInicio + "' AND data_impacto <= '" + dataFim + "'";
         try {
             Connection conexao = conexaoBD();
             PreparedStatement pt = conexao.prepareStatement(read);
