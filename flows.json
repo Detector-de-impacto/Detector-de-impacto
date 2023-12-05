@@ -1,0 +1,89 @@
+[
+    {
+        "id": "2420cd77be45125d",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8fc56099279bf3bc",
+        "type": "debug",
+        "z": "2420cd77be45125d",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "72dad5f976153f25",
+        "type": "http in",
+        "z": "2420cd77be45125d",
+        "name": "",
+        "url": "/impactoPost",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 290,
+        "y": 560,
+        "wires": [
+            [
+                "c1102a7236473179"
+            ]
+        ]
+    },
+    {
+        "id": "c1102a7236473179",
+        "type": "function",
+        "z": "2420cd77be45125d",
+        "name": "Send Mysql",
+        "func": "msg.topic = \"INSERT INTO registro (msg_impacto, FK_id_dispositivo, hora_impacto, data_impacto)\" +\n\"VALUES ('Impacto Detectado', '1', '\"+msg.payload.hora_impacto+\"', '\"+msg.payload.data_impacto+\"');\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 560,
+        "wires": [
+            [
+                "4306af5117c23f81",
+                "8fc56099279bf3bc"
+            ]
+        ]
+    },
+    {
+        "id": "4306af5117c23f81",
+        "type": "mysql",
+        "z": "2420cd77be45125d",
+        "mydb": "ccc1a3fcf40b1e7d",
+        "name": "",
+        "x": 920,
+        "y": 560,
+        "wires": [
+            [
+                "8fc56099279bf3bc"
+            ]
+        ]
+    },
+    {
+        "id": "ccc1a3fcf40b1e7d",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "esp8266",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
